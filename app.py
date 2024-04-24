@@ -21,7 +21,7 @@ def main():
     uploaded_file = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
 
     # Style dropdown
-    style = st.selectbox("Choose Style", ["Style 1", "Style 2", "Style 3"])
+    style = st.selectbox("Choose Style", ["Avatar", "Harry Potter", "Pirates of the Carribean", "Lord of the Rings", "Star Wars", "Marvel"])
 
     # Custom prompt button
     if st.button("Custom Prompt"):
@@ -37,7 +37,7 @@ def main():
     magic_button_clicked = col3.button("Magic 🪄")
 
     # Display image section
-    if uploaded_file is not None and magic_button_clicked:
+    if uploaded_file is not None:
         # Load and display uploaded image
         original_image = load_image(uploaded_file)
         col4, col5 = st.columns(2)
@@ -45,9 +45,10 @@ def main():
         col4.image(original_image, use_column_width=True)
 
         # Generate and display styled image
-        styled_image = generate_style_image(original_image, style)
-        col5.header("Styled Image")
-        col5.image(styled_image, use_column_width=True)
+        if magic_button_clicked:
+            styled_image = generate_style_image(original_image, style)
+            col5.header("Styled Image")
+            col5.image(styled_image, use_column_width=True)
     elif uploaded_file is None:
         st.warning("Please upload an image.")
     elif not magic_button_clicked:
