@@ -52,6 +52,6 @@ def main():
         st.warning("Please upload an image.")
     elif not magic_button_clicked:
         st.info("Click 'Magic 🪄' to generate styled image.")
-
+    
 if __name__ == "__main__":
     main()
