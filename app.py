@@ -140,12 +140,15 @@ def main():
         st.warning("Please upload an image.")
     elif not magic_button_clicked:
         st.info("Click 'Magic 🪄' to generate styled image.")
-    
+
 if __name__ == "__main__":
     config = OmegaConf.load("configs/generate.yaml")
     model = load_model_from_config(config, "checkpoints/instruct-pix2pix-00-22000.ckpt", None)
     model.eval().cuda()
+    print("<-------------------Model Checkpoint Loaded---------------->")
     model_wrap = K.external.CompVisDenoiser(model)
     model_wrap_cfg = CFGDenoiser(model_wrap)
+    print("<-------------------Config---------------->")
     null_token = model.get_learned_conditioning([""])
+    print("<-------------------Conditioning Learnt---------------->")
     main()
